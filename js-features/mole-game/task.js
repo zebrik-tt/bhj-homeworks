@@ -6,7 +6,6 @@ let lost = 0;
 function getHole(index) {
   return document.getElementById(`hole${index}`);
 }
-function checkResult(params) {}
 
 function updateGameData() {
   let gameOver = false;
