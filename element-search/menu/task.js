@@ -10,11 +10,18 @@ for (let index = 0; index < menuLink.length; index++) {
   if (currentMenuSub) {
     element.onclick = () => {
       for (let index = 0; index < menuSub.length; index++) {
-        const element = menuSub[index];
-        element.classList.remove("menu_active");
-      }
+        const elementSub = menuSub[index];
 
-      currentMenuSub.classList.add("menu_active");
+        if (elementSub.classList.contains("menu_active")) {
+          elementSub.classList.remove("menu_active");
+        } else {
+          elementSub.classList.add("menu_active");
+        }
+
+        if (elementSub.previousElementSibling != element) {
+          elementSub.classList.remove("menu_active");
+        }
+      };
       return false;
     };
   }
