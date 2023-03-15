@@ -24,7 +24,7 @@ function getRandomIndex() {
 }
 
 inputField?.addEventListener("keyup", (e) => {
-  if (inputField.value && e.key === "Enter") {
+  if (inputField.value.trim() && e.key === "Enter") {
     const currentTime = new Date().toLocaleTimeString("ru-Ru", {
       hour: "2-digit",
       minute: "2-digit",

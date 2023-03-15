@@ -81,17 +81,24 @@ class Autocomplete {
         value: 'Содержимое атрибута value'
       }
     */
-    const result = [];
-    Array.from(this.input).forEach(element => {
-      if (element.textContent.toLowerCase().includes(text.toLowerCase())) {
-        result.push({
-          text: element.textContent,
-          value: element.value
-        });
-      }
-    });
-    return result;
-  }
+    // const result = [];
+    // Array.from(this.input).forEach(element => {
+    //   if (element.textContent.toLowerCase().includes(text.toLowerCase())) {
+    //     result.push({
+    //       text: element.textContent,
+    //       value: element.value
+    //     });
+    //   }
+    // });
+    // return result;
+
+
+    // В третьем задании, вметсто forEach можно было использовать метод filter для фильтрации элементов и метод map для их преобразования в нужный формат. Реализция получилась бы в одну строку: return Array.from(this.input).filter(...).map(...);
+
+    return Array.from(this.input).filter(item => item.textContent.toLowerCase().includes(text.toLowerCase())).map(i => ({ text: i.textContent, value: i.value }));
+    // ... Это теперь вообще можно прочитать?
+  };
 }
+
 
 new Autocomplete(document.querySelector('.autocomplete'));
