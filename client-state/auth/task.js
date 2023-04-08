@@ -15,34 +15,34 @@ if (userIdInStorage) {
   hideSignin();
   welcome.querySelector("#user_id").textContent = userIdInStorage;
 
-} else {
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const formData = new FormData(form);
-
-    // Jтправим данные
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "https://students.netoservices.ru/nestjs-backend/auth");
-    xhr.send(formData);
-
-    // Этот код сработает после того, как мы получим ответ сервера
-    xhr.onload = function () {
-      if (JSON.parse(xhr.response).success) {
-        hideSignin();
-        const userId = JSON.parse(xhr.response).user_id;
-
-        localStorage.setItem("user_id", userId);
-        welcome.querySelector("#user_id").textContent = userId;
-
-      } else {
-        alert("Неверный логин/пароль");
-      }
-    };
-
-    xhr.onerror = function () {
-      alert("Запрос не удался");
-    };
-  });
 }
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formData = new FormData(form);
+
+  // Jтправим данные
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "https://students.netoservices.ru/nestjs-backend/auth");
+  xhr.responseType = "json";
+  xhr.send(formData);
+
+  // Этот код сработает после того, как мы получим ответ сервера
+  xhr.onload = function () {
+    if (xhr.response.success) {
+      hideSignin();
+      const userId = xhr.response.user_id;
+
+      localStorage.setItem("user_id", userId);
+      welcome.querySelector("#user_id").textContent = userId;
+
+    } else {
+      alert("Неверный логин/пароль");
+    }
+  };
+
+  xhr.onerror = function () {
+    alert("Запрос не удался");
+  };
+});
 
